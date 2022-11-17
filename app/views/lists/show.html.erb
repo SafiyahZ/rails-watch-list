@@ -1,1 +1,13 @@
 <%= @list.name%>
+
+<ul class="bookmark-cards">
+    <li class="bookmark-list">
+      <%= link_to 'Add a Bookmark 📑', new_list_bookmark_path(@list) %>
+    </li>
+</ul>
+
+<ul class="home-card">
+    <li class="home-page">
+      <%= link_to 'Go back to lists', lists_path() %>
+    </li>
+</ul>
