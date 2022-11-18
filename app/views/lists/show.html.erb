@@ -16,3 +16,8 @@
       <%= link_to 'Go back to lists', lists_path() %>
     </li>
 </ul>
+
+<%= link_to "Delete",
+  list_path(@list),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>

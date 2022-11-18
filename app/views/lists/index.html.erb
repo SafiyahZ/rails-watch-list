@@ -1,15 +1,34 @@
-<main>
-    <h2>Movie Lists</h2>
-  <ul class="list-cards">
-    <% @lists.each do |list| %>
-      <li> <%= link_to list.name, list_path(list) %>
-      </li>
+<%# Navbar %>
+<div class="border-bottom bg-white">
+  <div class="container d-flex align-items-center justify-content-between py-2">
+        <%# Movie picture %>
+        <%= image_tag "popcorn.jpg", height: 50%>
+        <!-- Link to create list page -->
+        <%= link_to 'New list 📑', new_list_path %>
+  </div>
+</div>
+
+
+<%# Background Image and Text %>
+<div class = "bg-image" style="background-image: url(<%= asset_path 'cinema.png' %>); height: 50vh;" background-size: contain>
+  <div class="row">
+    <div class="text-center">
+      <h1> Movie List 🍿 </h1>
+    </div>
+  </div>
+</div>
+
+<%# Containers %>
+<div class="grid-container">
+  <div class="idk">
+    <ul class="list-cards">
+      <% @lists.each do |list| %>
+        <li style="list-style-type: none;"> <%= link_to list.name, list_path(list) %>
+        </li>
         <% if list.photo.attached?%>
          <%= cl_image_tag list.photo.key, height: 200, width: 300, crop: :fill %>
         <% end %>
-    <% end %>
-    <li class="add-list">
-      <%= link_to 'Add List 📑', new_list_path %>
-    </li>
-  </ul>
-</main>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,13 +1,23 @@
-<div class="container py-5">
+<div class="container py-4">
   <div class="row">
     <div class="col-12 col-md-6 offset-lg-3">
       <div class="bg-white rounded p-3 shadow">
         <h3>Create a new list</h3>
         <%= simple_form_for @list do |f| %>
           <%= f.input :name, placeholder: 'Drama' %>
-          <%= f.submit class: 'btn btn-flat' %>
           <%= f.input :photo, as: :file %>
+          <%= f.submit class: 'btn btn-primary' %>
         <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container py-1">
+   <div class="row">
+      <div class="col-12 col-md-6 offset-lg-3">
+      <%= link_to 'Made a mistake? Go back to the home-page 🏠', lists_path() %>
       </div>
     </div>
   </div>
