@@ -1,4 +1,9 @@
 <%= @list.name%>
+<% if @list.photo.attached?%>
+<%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
+
 
 <ul class="bookmark-cards">
     <li class="bookmark-list">
