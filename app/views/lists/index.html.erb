@@ -19,14 +19,14 @@
 </div>
 
 <%# Containers %>
-<div class="grid-container">
-  <div class="idk">
-    <ul class="list-cards">
+<div class="row">
+  <div class="column">
+    <ul class="list-cards d-flex justify-content-around py-4">
       <% @lists.each do |list| %>
-        <li style="list-style-type: none;"> <%= link_to list.name, list_path(list) %>
+        <li style="list-style-type: none; display:inline-block; "> <%= link_to list.name, list_path(list) %>
         </li>
         <% if list.photo.attached?%>
-         <%= cl_image_tag list.photo.key, height: 200, width: 300, crop: :fill %>
+          <%= cl_image_tag list.photo.key, height: 200, width: 300, crop: :fill %>
         <% end %>
       <% end %>
     </ul>
