@@ -1,23 +1,41 @@
-<%= @list.name%>
-<% if @list.photo.attached?%>
-<%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
+<%# Navbar %>
+<div class="border-bottom bg-white">
+  <div class="container d-flex align-items-center justify-content-between py-2">
+        <%# Movie picture %>
+        <%= link_to 'Add a Bookmark 📎', new_list_bookmark_path(@list)%>
+        <!-- Link to create list page -->
+        <%= link_to '🏠', lists_path() %>
+  </div>
+</div>
+
+<%# Background Image %>
+<div class="position-relative">
+  <div class="banner m-4 d-flex align-items-center justify-content-center" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.photo.attached? ? cl_image_path(@list.photo.key) : asset_path('list_background.jpg') %>)">
+    <div class="text-center text-white">
+      <h1><%= @list.name %></h1>
+  </div>
+</div>
 
 
-
-<ul class="bookmark-cards">
-    <li class="bookmark-list">
-      <%= link_to 'Add a Bookmark 📎', new_list_bookmark_path(@list) %>
-    </li>
-</ul>
-
-<ul class="home-card">
-    <li class="home-page">
-      <%= link_to 'Go back to lists', lists_path() %>
-    </li>
-</ul>
-
-<%= link_to "Delete",
-  list_path(@list),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
+<%#  Display Movies and Review%>
+<div class="row my-2">
+    <% @list.movies.each do |movie| %>
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <div class="col-12 col-sm-6 mb-4" data-aos="zoom-in">
+        <div class="bg-white rounded shadow h-100 px-4">
+          <%= image_tag movie.poster_url, alt: movie.title, class: "movie-img rounded-top" %>
+          <div class="p-3 rounded-bottom d-flex flex-column">
+            <strong><%= movie.title %> <span class="text-muted font-weight-normal">• <%= movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
+            <small class="text-muted"><%= movie.overview %></small>
+            <div class="d-flex align-items-end justify-content-between pt-4">
+              <div>
+                <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= bookmark.comment %></small>
+              </div>
+              <small class="text-right flex-shrink-0"><%= link_to "delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

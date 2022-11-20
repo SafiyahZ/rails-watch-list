@@ -10,25 +10,29 @@
 
 
 <%# Background Image and Text %>
-<div class = "bg-image" style="background-image: url(<%= asset_path 'cinema.png' %>); height: 50vh;" background-size: contain>
-  <div class="row">
-    <div class="text-center">
+<div class = "banner mb-4 d-flex align-items-center justify-content-center" style="background-image: url(<%= asset_path 'cinema.png' %>); height: 50vh;" background-size: cover >
+    <div class="text-center text-white">
       <h1> Movie List 🍿 </h1>
     </div>
-  </div>
+</div>
+
+<%# List Titles%>
+<div class="row">
+  <ul class= "d-flex justify-content-around">
+  <% @lists.each do |list| %>
+    <li style="list-style-type: none; display:inline-block; "> <%= link_to list.name, list_path(list) %>
+        </li>
+  <% end%>
+  </ul>
 </div>
 
 <%# Containers %>
 <div class="row">
-  <div class="column">
-    <ul class="list-cards d-flex justify-content-around py-4">
+    <ul class="list-cards d-flex justify-content-around">
       <% @lists.each do |list| %>
-        <li style="list-style-type: none; display:inline-block; "> <%= link_to list.name, list_path(list) %>
-        </li>
         <% if list.photo.attached?%>
           <%= cl_image_tag list.photo.key, height: 200, width: 300, crop: :fill %>
         <% end %>
       <% end %>
     </ul>
-  </div>
 </div>

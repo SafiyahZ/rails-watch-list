@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  require 'mini_magick'
   before_action :set_list, only: %i[show edit update destroy]
 
   def index
@@ -21,6 +22,7 @@ class ListsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
   end
 
   def edit
